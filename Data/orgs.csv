@@ -1,0 +1,7 @@
+"id","name","address","zipcode","city","country","email","phone","longtitude","latitude"
+1,"TechCollege","Øster Uttrupvej 1A","9000","Aalborg","Danmark","info@techcollege.dk","12345678","57.047680","9.967620"
+2,"Krastrup Genbrugsplads","Mølholmvej 20B","9520","Skørping","Danmark","affald@rebild.dk","99887691","56.864370","10.031320"
+3,"Genbrugspladsen i Sørup","Hjedsbækvej 107","9530","Støvring","Danmark","affald@rebild.dk","99889375","56.874250","9.753660"
+4,"Genbrugspladsen Over Kæret","Over Bækken 2","9000","Aalborg","Danmark","info@sorupgenbrug.dk","99314955","57.025900","9.921590"
+5,"Genbrugspladsen Storvorde","Engvej 26","9280","Storvorde","Danmark","info@sorupgenbrug.dk","12345678","56.993840","10.127330"
+6,"Genbrugsplads og Genbrugscenter Hou","Skovsgårdsvej 145","9370","Hals","Danmark","info@sorupgenbrug.dk","61873091","0","0"
