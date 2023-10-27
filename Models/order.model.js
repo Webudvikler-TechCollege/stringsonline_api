@@ -1,5 +1,7 @@
 import sequelize from '../Config/sequelize.config.js'
 import { DataTypes, Model } from 'sequelize'
+import User from './System/user.model.js'
+import Country from './System/country.model.js'
 
 // Skriver ny klasse og udvider den med SQ's Model klasse
 class Order extends Model {}
@@ -13,29 +15,13 @@ Order.init({
 		allowNull: false,
 		primaryKey: true
 	},
-	firstname: {
-		type: DataTypes.STRING,
-		allowNull: false
-	},
-	lastname: {
-		type: DataTypes.STRING,
-		allowNull: false
-	},
-	address: {
-		type: DataTypes.STRING,
-		allowNull: false
-	},
-	zipcode: {
+	user_id: {
 		type: DataTypes.INTEGER,
-		allowNull: false
-	},
-	city: {
-		type: DataTypes.STRING,
-		allowNull: false
-	},
-	email: {
-		type: DataTypes.STRING,
-		allowNull: false
+		allowNull: false,
+		references: {
+			model: User,
+			key: 'id'
+		}	
 	},
 	delivery_address: {
 		type: DataTypes.STRING,
@@ -48,6 +34,14 @@ Order.init({
 	delivery_city: {
 		type: DataTypes.STRING,
 		allowNull: false
+	},
+	delivery_country_id: {
+		type: DataTypes.INTEGER,
+		allowNull: false,
+		references: {
+			model: Country,
+			key: 'id'
+		}
 	},
 	status: {
 		type: DataTypes.BOOLEAN,

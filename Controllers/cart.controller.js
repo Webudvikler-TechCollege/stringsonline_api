@@ -8,8 +8,8 @@ import { QueryParamsHandle } from '../Middleware/helpers.js'
 User.hasMany(CartLine)
 CartLine.belongsTo(User)
 
-Cart.hasMany(Product)
-Product.belongsTo(Cart)
+Product.hasMany(CartLine)
+CartLine.belongsTo(Product)
 
 export default class CartController {
 
@@ -91,12 +91,12 @@ export default class CartController {
 	 */
 	 create = async (req, res) => {
 		const user_id = await getUserFromToken(req, res)
-		const { subject, comment, date, num_stars, product_id } = req.body
+		const { product_id, quantity } = req.body
 
-		if(subject && comment && num_stars && product_id) {
+		if(product_id && quantity) {
 			try {
 				req.body.user_id = user_id
-				const model = await Cart.create(req.body)
+				const model = await CartLine.create(req.body)
 				return res.json({
 					message: `Record created`,
 					newId: model.id
@@ -120,11 +120,11 @@ export default class CartController {
 	 * @return {boolean} Returnerer true/false
 	 */	
 	 update = async (req, res) => {
-		const { id, subject, comment, num_stars, is_active } = req.body
+		const { id, quantity } = req.body
 
-		if(id, subject && comment && num_stars && is_active) {
+		if(id, quantity) {
 			try {
-				const model = await Cart.update(req.body, {
+				const model = await CartLine.update(req.body, {
 					where: { id: id }
 				})
 				return res.json({
@@ -153,14 +153,14 @@ export default class CartController {
 
 		if(id) {
 			try {
-				await Cart.destroy({ 
-					where: { id: req.params.id }
+				await CartLine.destroy({ 
+					where: { id: id }
 				})
 				res.status(200).send({
 					message: `Record deleted`
 				})
 			}
-			catch(err) {
+			catch(error) {
 				res.status(418).send({
 					message: `Could not delete record: ${error}`
 				})									
@@ -171,4 +171,34 @@ export default class CartController {
 			})			
 		}
 	}	
+
+	/**
+	 * Empty Metode - sletter alle linjer
+	 * @param {object} req Request Object
+	 * @param {object} res Response Object
+	 * @return {boolean} Returnerer true/false
+	 */	
+	empty = async (req, res) => {
+		const user_id = await getUserFromToken(req, res)
+
+		if(user_id) {
+			try {
+				await CartLine.destroy({ 
+					where: { user_id: user_id }
+				})
+				res.status(200).send({
+					message: `Cart deleted`
+				})
+			}
+			catch(error) {
+				res.status(418).send({
+					message: `Could not delete record: ${error}`
+				})									
+			}	
+		} else {
+			res.status(403).send({
+				message: 'Wrong parameter values'
+			})			
+		}
+	}		
 }

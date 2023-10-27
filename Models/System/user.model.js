@@ -2,6 +2,7 @@ import sequelize from "../../Config/sequelize.config.js"
 import { DataTypes, Model } from "sequelize"
 import bcrypt from "bcrypt"
 import Org from "./org.model.js"
+import Country from "./country.model.js"
 
 class User extends Model {}
 
@@ -20,6 +21,26 @@ User.init(
     lastname: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    address: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    zipcode: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    country_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Country,
+        key: 'id'
+      }
     },
     email: {
       type: DataTypes.STRING,

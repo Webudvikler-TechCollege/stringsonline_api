@@ -3,6 +3,7 @@ import csv from 'csv-parser'
 import path from 'path';
 import sequelize from '../../Config/sequelize.config.js';
 
+import Countries from '../../Models/System/country.model.js';
 import Orgs from '../../Models/System/org.model.js';
 import Groups from '../../Models/System/group.model.js';
 import Users from '../../Models/System/user.model.js';
@@ -36,20 +37,24 @@ class SeedController {
 			let data;
 			let handle;
 
+			// Countries
+			data = await this.get_csv_data('System/countries.csv')
+			handle = await Countries.bulkCreate(data, { transaction });
+
 			// Orgs
-			data = await this.get_csv_data('orgs.csv')
+			data = await this.get_csv_data('System/orgs.csv')
 			handle = await Orgs.bulkCreate(data, { transaction });
 
 			// Groups
-			data = await this.get_csv_data('groups.csv')
+			data = await this.get_csv_data('System/groups.csv')
 			handle = await Groups.bulkCreate(data, { transaction });
 
 			// User
-			data = await this.get_csv_data('users.csv')
+			data = await this.get_csv_data('System/users.csv')
 			handle = await Users.bulkCreate(data, { transaction });
 
 			// User Groups Relations
-			data = await this.get_csv_data('usergrouprel.csv')
+			data = await this.get_csv_data('System/usergrouprel.csv')
 			handle = await UserGroupRel.bulkCreate(data, { transaction });
 
 			//////////////////// 

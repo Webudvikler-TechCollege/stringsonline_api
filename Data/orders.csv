@@ -1,2 +1,2 @@
-"id","firstname","lastname","address","zipcode","city","delivery_address","delivery_zipcode","delivery_city","email","status"
-1,"Klaus","Bundgaard","Øster Uttrupvej 1A","9000","Aalborg","Kastetvej 1","9000","Aalborg","dav@hotmail.com",1
+"id","user_id","delivery_address","delivery_zipcode","delivery_city","delivery_country_id","status"
+1,1,"Rørdalsvej 16","9000","Aalborg",58,1

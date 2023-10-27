@@ -1,0 +1,2 @@
+"id","firstname","lastname","address","zipcode","city","country_id","email","password","org_id","refresh_token","is_active"
+1,"Klaus","Bundgaard","Øster Uttrupvej 1A",9000,"Aalborg",58,"info@webudvikler.dk","password",1,"-",1
