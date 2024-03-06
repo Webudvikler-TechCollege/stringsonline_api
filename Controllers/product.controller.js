@@ -1,4 +1,4 @@
-import { Op } from 'sequelize'
+import { Op, Sequelize } from 'sequelize'
 import { QueryParamsHandle } from '../Middleware/helpers.js'
 import Brand from '../Models/brand.model.js'
 import Product from '../Models/product.model.js'
@@ -31,8 +31,18 @@ export default class ProductController {
 			const query = {
 				order: [qp.sort_key],
 				limit: qp.limit,
-				attributes: qp.attributes
+				attributes: [
+					...qp.attributes,
+					[Sequelize.fn(	
+						'CONCAT', 
+						'http://localhost:4000/Assets/Images/products/', 
+						Sequelize.col('image')
+					), 'image_filepath'],
+					
+				
+				]
 			}
+
 
 			if(productgroup_slug) {
 				query.include = {
@@ -78,18 +88,36 @@ export default class ProductController {
 	 * @return {object} Returnerer JSON object med detaljer
 	 */
 	details = async (req, res) => {
-		const { id } = req.params
+		const { product_slug } = req.params
 
-		if(id) {
+		if(product_slug) {
 			try {
 				const result = await Product.findOne({	
+					attributes: [
+						'id',
+						'title',
+						'description_long',
+						'price',
+						'offerprice',
+						'stock',
+						'slug',
+						[Sequelize.fn(	
+							'CONCAT', 
+							'http://localhost:4000/Assets/Images/products/', 
+							Sequelize.col('image')
+						), 'image_filepath']
+					],
+					/*
 					include: [
 						{
 							model: Brand,
-							attributes: ['id', 'title']
+							attributes: [
+								'id', 
+								'title'
+							]
 						}
-					],
-					where: { id: id}
+					], */
+					where: { slug: product_slug, is_active: 1 }
 				});
 				res.json(result)						
 			} catch (error) {

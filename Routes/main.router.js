@@ -15,7 +15,7 @@ const productcontrol = new ProductController
 MainRouter.get('/products', (req, res) => { productcontrol.list(req, res) })
 MainRouter.get('/products/search/:keyword', (req, res) => { productcontrol.list(req, res) })
 MainRouter.get('/products/:productgroup_slug', (req, res) => { productcontrol.list(req, res) })
-MainRouter.get('/products/details/:id([0-9]*)', (req, res) => { productcontrol.details(req, res) })
+MainRouter.get('/products/details/:product_slug', (req, res) => { productcontrol.details(req, res) })
 
 // Productgroup Routes
 const productgroupcontrol = new ProductGroupController
