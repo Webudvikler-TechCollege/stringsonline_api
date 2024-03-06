@@ -21,7 +21,7 @@ export default class ReviewsController {
 	list = async (req, res) => {
 		const { product_id } = req.params
 
-		if(org_id) {
+		if(product_id) {
 			try {
 				const result = await Review.findAll({
 					attributes: ['id', 'subject', 'num_stars', 'created_at'],

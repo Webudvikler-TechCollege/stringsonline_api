@@ -49,7 +49,7 @@ MainRouter.delete('/orderlines/:id([0-9]*)', Authorize, (req, res) => { orderlin
 
 // Review Routes
 const reviewcontrol = new ReviewController
-MainRouter.get('/reviews/:org_id([0-9]*)', (req, res) => { reviewcontrol.list(req, res) })
+MainRouter.get('/reviews/:product_id([0-9]*)', (req, res) => { reviewcontrol.list(req, res) })
 MainRouter.get('/reviews/details/:id([0-9]*)', (req, res) => { reviewcontrol.details(req, res) })
 MainRouter.post('/reviews', Authorize, (req, res) => { reviewcontrol.create(req, res) })
 MainRouter.put('/reviews', Authorize, (req, res) => { reviewcontrol.update(req, res) })
