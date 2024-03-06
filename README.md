@@ -61,3 +61,5 @@ API'et har en brugertabel med relationer til brugergrupper og organisationer. So
 
 ## Start API'et
 Kør `nodemon` i terminalen for at starte projektet. Databasen skal selvfølgelig være sat op før at API'et vil virke.
+
+God fornøjelse!
